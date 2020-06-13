@@ -1,1 +1,20 @@
-# aulaphp
+- **Aula** - PHP
+    - [x]  O que é o PHP?
+    - [x]  Imprimindo Texto
+    - [x]  Variáveis
+    - [x]  Comentários
+    - [x]  Operadores matemáticos
+    - [ ]  Constante
+    - [x]  If, Else e Elseif
+    - [ ]  Switch
+    - [ ]  While
+    - [ ]  For
+    - [ ]  Dowhile
+    - [ ]  Array
+    - [ ]  Foreach
+    - [ ]  Function
+    - [ ]  Função com valor por referência
+    - [x]  Funções do PHP
+    - [x]  POST
+    - [x]  GET
+    - [ ]  Data e Hora
