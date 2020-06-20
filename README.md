@@ -4,13 +4,13 @@
     - [x]  Variáveis
     - [x]  Comentários
     - [x]  Operadores matemáticos
-    - [ ]  Constante
+    - [x]  Constante
     - [x]  If, Else e Elseif
     - [ ]  Switch
-    - [ ]  While
+    - [x]  While
     - [ ]  For
     - [ ]  Dowhile
-    - [ ]  Array
+    - [x]  Array
     - [ ]  Foreach
     - [ ]  Function
     - [ ]  Função com valor por referência

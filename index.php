@@ -1,36 +1,5 @@
 <?php
-
-    // Esse é um comentário
-    # Esse é outro comentário
-    /*
-
-        Esse é um comentário de multiplas linhas
-        Adição: (+) 1 + 1
-        Subtração: (-) 5 - 4
-        Multiplicação: (*) 8 * 8
-        Divisão: / (/) 6 / 3
-
-    */
-
-    if( $_POST ) {
-        
-        if ( isset($_POST['aluno']) && !empty($_POST['aluno']) ) {        
-            $aluno = $_POST['aluno'];        
-        } else {
-            echo "O campo Aluno é obrigatório!";
-        }
-
-        if ( isset($_POST['telefone']) ) {
-            $telefone = $_POST['telefone'];
-        } 
-        if ( isset($_POST['email']) ) {
-            $email = $_POST['email'];
-        } 
-        if ( isset($_POST['senha']) ) {
-            $senha = $_POST['senha'];
-        } 
-
-    }
+    include('config_db.php');
 ?>
 
 <!DOCTYPE html>
@@ -43,35 +12,13 @@
     </head>
     <body>
 
-        <div class="container-fluid">
+        <div class="container-fluid">        
 
-            <div class="row" style="border: 1px solid red; height: auto;">
-                <form action="index.php" method="POST">
-                    <div class="col-md-3">Aluno:</div>
-                    <div class="col-md-9">
-                        <input type="text" name="aluno" id="">
-                        <!-- <input type="text" name="aluno" style="background-color: red;" id=""> -->
-                    </div>
-                    <div class="col-md-3">Telefone:</div>
-                    <div class="col-md-9">
-                        <input type="text" name="telefone" id="">
-                    </div>
-                    <div class="col-md-3">Email:</div>
-                    <div class="col-md-9">
-                        <input type="text" name="email" id="">
-                    </div>
-                    <div class="col-md-3">Senha:</div>
-                    <div class="col-md-9">
-                        <input type="password" name="senha" id="">
-                    </div>
-                    <div class="col-md-12">
-                        <button type="submit">Cadastrar</button>
-                    </div>
-                </form>
-            </div>
-
-            <div class="row" style="border: 1px solid blue; height: 500px;"></div>
-
+            <?php 
+                include('formulario.php');
+                include('tabela.php'); 
+            ?>
+            
         </div>
 
         
