@@ -5,6 +5,8 @@
     $email = null;
     $senha = null;
 
+    $urlAction = "index.php";
+
     if( $_POST ) {
 
         $continuaCadastro = TRUE;
@@ -43,12 +45,21 @@
                 die("Conexão falhou: ". mysqli_connect_error());
             }
 
-            $sql = "INSERT INTO alunos (nome, telefone, email, senha) VALUES ";
-            $sql .= "(";
-            $sql .= "'". $aluno ."',";
-            $sql .= "'". $telefone ."',";
-            $sql .= "'". $email ."',";
-            $sql .= "'". $senha ."')";
+            if(isset($_GET['action']) && $_GET['action'] == 'editar') {
+                $sql = "UPDATE alunos SET ";
+                $sql .= "nome='". $_POST['aluno'] . "',";
+                $sql .= "telefone='". $_POST['telefone'] . "',";
+                $sql .= "email='". $_POST['email'] . "',";
+                $sql .= "senha='". $_POST['senha'] . "' ";
+                $sql .= "WHERE id=". $_GET['id'];
+            } else {
+                $sql = "INSERT INTO alunos (nome, telefone, email, senha) VALUES ";
+                $sql .= "(";
+                $sql .= "'". $aluno ."',";
+                $sql .= "'". $telefone ."',";
+                $sql .= "'". $email ."',";
+                $sql .= "'". $senha ."')";
+            }            
 
             $result = mysqli_query($conn, $sql);
             if($result) {
@@ -64,10 +75,43 @@
 
     }
 
+    if($_GET) {
+        if($_GET['action'] == 'remover') {
+            $conn = mysqli_connect(HOST, USERNAME, PASSWORD, DATABASE);
+            if(!$conn) {
+                die("Conexão falhou: ". mysqli_connect_error());
+            }
+            $sql = "DELETE FROM alunos WHERE id = ". $_GET['id'];
+            if(mysqli_query($conn, $sql)) {
+                echo "Aluno removido com sucesso!";
+            } else {
+                echo "Error: " . mysqli_error($conn);
+            }
+            mysqli_close($conn);
+        } else {
+            $urlAction = $urlAction . "?action=" . $_GET['action'] . "&id=" . $_GET['id'];
+
+            $conn = mysqli_connect(HOST, USERNAME, PASSWORD, DATABASE);
+            if(!$conn) {
+                die("Conexão falhou: ". mysqli_connect_error());
+            }
+            $sql = "SELECT * FROM alunos WHERE id = ". $_GET['id'];
+            $result = mysqli_query($conn, $sql);
+            if(mysqli_num_rows($result) > 0) {
+                while($row = mysqli_fetch_assoc($result)) {
+                    $aluno = $row['nome'];
+                    $telefone = $row['telefone'];
+                    $email = $row['email'];
+                    $senha = $row['senha'];
+                }
+            }
+        }
+    }
+
 ?>
 
 <div class="row" style="border: 1px solid red; height: auto;">
-    <form action="index.php" method="POST">
+    <form action="<?php echo $urlAction; ?>" method="POST">
         <div class="col-md-3">Aluno:</div>
         <div class="col-md-9">
             <input type="text" name="aluno" id="" value="<?php echo $aluno; ?>">
@@ -87,6 +131,7 @@
         </div>
         <div class="col-md-12">
             <button type="submit">Cadastrar</button>
+            <button type="button" onclick="window.location='index.php';">Limpar</button>
         </div>
     </form>
 </div>
