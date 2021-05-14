@@ -8,6 +8,7 @@ $nomes[0] = "Leonardo";
 $nomes[1] = "Jessica";
 $nomes['a'] = "Bruno";
 $nomes['a'] = "Ana";
+$nomes['a'] = "Ana";
 
 echo $nomes[0];
 echo "<br>";
